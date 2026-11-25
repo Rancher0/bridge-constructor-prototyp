@@ -1,0 +1,50 @@
+plugins { id 'com.android.application' }
+
+// Signatur-Daten liegen AUSSERHALB des Repos (Standard: <Projektordner>/../android-signing/keystore.properties),
+// überschreibbar mit -PsigningProps=/pfad/keystore.properties
+def signingPropsFile = file(project.findProperty('signingProps') ?: "${rootDir}/../android-signing/keystore.properties")
+def signingProps = new Properties()
+if (signingPropsFile.exists()) { signingPropsFile.withInputStream { signingProps.load(it) } }
+
+android {
+    namespace 'com.rancher0.bridgeconstructor'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.rancher0.bridgeconstructor'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            if (signingPropsFile.exists()) {
+                storeFile file(signingProps['storeFile'])
+                storePassword signingProps['storePassword']
+                keyAlias signingProps['keyAlias']
+                keyPassword signingProps['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (signingPropsFile.exists()) signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+// Spiel-HTML vor jedem Build aus ../index-captain.html in die Assets kopieren
+tasks.register('copyGameHtml', Copy) {
+    from("${rootDir}/../index-captain.html") { rename { 'index.html' } }
+    into "${projectDir}/src/main/assets"
+}
+preBuild.dependsOn copyGameHtml

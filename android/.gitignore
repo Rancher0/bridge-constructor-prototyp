@@ -1,0 +1,17 @@
+# Build-Ausgaben und lokale Dateien
+build/
+app/build/
+.gradle/
+local.properties
+*.iml
+.idea/
+captures/
+# Spiel-HTML wird beim Build aus ../index-captain.html kopiert
+app/src/main/assets/index.html
+# Signatur-Daten niemals einchecken
+*.jks
+*.keystore
+keystore.properties
+../android-signing/
+PASSWORT.txt
+*password*
