@@ -1,0 +1,52 @@
+<div id="app">
+  <header id="hud">
+    <div class="lvl"><b id="lvlName">Level</b><small id="lvlDesc"></small></div>
+    <div id="budget"><div class="row"><span>Kosten / Budget</span><span><b id="costTxt">0 €</b> / <span id="budgetTxt">0 €</span></span></div><div class="bar"><div class="fill" id="budgetFill"></div></div></div>
+    <span class="pill" id="modeTag">BAUEN</span>
+    <button class="iconbtn" id="bCam" title="Kamerawinkel">🎥</button>
+    <button class="iconbtn" id="bSound" title="Ton an/aus">🔊</button>
+  </header>
+  <main id="stage">
+    <div id="hintBar"></div>
+    <div id="legend"></div>
+    <div id="label3d"></div>
+    <div id="matTip"></div>
+    <div id="toast"></div>
+    <div id="windBox"><span class="wi">💨</span><div><b id="windTxt">Wind</b><div class="wbar"><i id="windFill"></i></div></div><span id="windArrow">⟵</span></div>
+    <div id="pctLayer"></div>
+    <div id="speedBox"><span class="ti" title="Zeitlupe">⏱</span><button data-ts="1">1×</button><button data-ts="0.5">½×</button><button data-ts="0.25">¼×</button><button data-ts="0.1">⅒×</button><button id="bPct" title="Belastung aller Bauteile in Prozent anzeigen">%</button></div>
+    <div id="camPanel"><label>Drehen <input type="range" id="camYaw" min="-45" max="45" step="1" value="-9"></label><label>Neigen <input type="range" id="camPitch" min="0" max="40" step="1" value="6"></label><button class="btn mini" id="camReset">Standard</button></div>
+  </main>
+  <nav id="toolbar">
+    <div class="group" id="gMat">
+      <button class="btn" data-tool="road" title="Straße"><span class="drv">🚗</span><span class="sw" style="background:#2b2f36;box-shadow:inset 0 0 0 2px #facc15"></span>Straße</button>
+      <button class="btn" data-tool="wood" title="Holz"><span class="sw" style="background:linear-gradient(90deg,#a86b35,#d79a5a,#a86b35)"></span>Holz</button>
+      <button class="btn" data-tool="alu" title="Aluminium"><span class="sw" style="background:linear-gradient(180deg,#f8fafc,#c4ccd6 60%,#e5e9ee)"></span>Alu</button>
+      <button class="btn" data-tool="cast" title="Gusseisen"><span class="sw" style="background:radial-gradient(circle at 30% 40%,#6b7280,#30343a)"></span>Guss</button>
+      <button class="btn" data-tool="steel" title="Stahl"><span class="sw" style="background:linear-gradient(180deg,#f1f5f9,#7c8ea3 55%,#c7d2de)"></span>Stahl</button>
+      <button class="btn" data-tool="concrete" title="Beton"><span class="sw" style="background:#a8acae;height:12px;border-radius:3px"></span>Beton</button>
+      <button class="btn" data-tool="cable" title="Kabel"><span class="sw" style="background:#e8b931;height:3px"></span>Kabel</button>
+      <button class="btn" data-tool="rope" title="Stahlseil"><span class="sw" style="background:repeating-linear-gradient(60deg,#eef3f8 0 3px,#7d8a98 3px 6px);height:5px"></span>Stahlseil</button>
+    </div>
+    <div class="sep"></div>
+    <div class="group" id="gEdit">
+      <button class="btn" data-tool="delete" title="Löschen"><span class="ic">✂️</span>Löschen</button>
+      <button class="btn" id="bUndo" title="Rückgängig"><span class="ic">↶</span>Zurück</button>
+      <button class="btn warn" id="bReset" title="Alles löschen"><span class="ic">🗑️</span>Alles</button>
+      <button class="btn" id="bVeh" title="Fahrzeug"><span class="ic" id="vehIc">🚗</span><span id="vehTxt">Auto</span></button>
+    </div>
+    <div class="sep"></div>
+    <div class="group">
+      <button class="btn" id="bLevels"><span class="ic">🗺️</span>Level</button>
+      <button class="btn" id="bView" title="Ansicht zurücksetzen"><span class="ic">🎯</span>Ansicht</button>
+      <button class="btn" id="bHelp"><span class="ic">💡</span>Tipps</button>
+      <button class="btn" id="bExample" title="Beispielbrücke laden (ohne Sterne)"><span class="ic">📐</span>Beispiel</button>
+      <button class="btn go" id="bGo"><span class="ic">▶</span><span id="goTxt">Testen</span></button>
+    </div>
+  </nav>
+</div>
+<div class="overlay" id="ovLevels"><div class="card"><h2>🗺️ Level wählen</h2><div class="lvlgrid" id="lvlGrid"></div><div class="btns"><button class="btn" data-close>Schließen</button></div></div></div>
+<div class="overlay" id="ovIntro"><div class="card"><h2 id="introTitle"></h2><p id="introDesc"></p><ol class="tips" id="introTips"></ol>
+<p style="font-size:12px;opacity:.75">Bauen: vom Knoten <b>ziehen</b> oder <b>Start- und Endpunkt antippen</b>. Zu lange Stäbe werden <b>automatisch geteilt</b>. Ansicht: zwei Finger (zoomen/verschieben), Mausrad, rechte Maustaste, 🎥 Kamerawinkel. 📐 lädt eine Beispielbrücke (ohne Sterne). Im Test: ⏱ Zeitlupe (bis ⅒×) und % zeigt die Belastung jedes Bauteils.</p>
+<div class="btns"><button class="btn go" data-close>Los geht's!</button></div></div></div>
+<div class="overlay" id="ovResult"><div class="card" id="resCard"><h2 id="resTitle"></h2><div class="stars" id="resStars"></div><p id="resText"></p><div class="btns" id="resBtns"></div></div></div>
